@@ -124,7 +124,13 @@ namespace MelonLoader.AssemblyGenerator
             bool run_fallback = false;
             try
             {
-                DownloaderAndUnpacker.Run($"{ExternalToolVersions.UnityDependenciesBaseUrl}{unityVersion}.zip", unityVersion, localConfig.UnityVersion, UnityDependencies.BaseFolder, tempfile);
+                if (unityVersion != "2019.4.7") 
+                {
+                    DownloaderAndUnpacker.Run($"{ExternalToolVersions.UnityDependenciesBaseUrl}{unityVersion}.zip", unityVersion, localConfig.UnityVersion, UnityDependencies.BaseFolder, tempfile);
+                } else
+                {
+                    DownloaderAndUnpacker.Run($"https://github.com/HerpDerpinstine/MelonLoader/raw/ba7bfd68a01bf62d81a72c5fe04d98ca03f07402/BaseLibs/UnityDependencies/2019.4.7.zip", unityVersion, localConfig.UnityVersion, UnityDependencies.BaseFolder, tempfile);
+                }
                 localConfig.UnityVersion = unityVersion;
                 localConfig.Save(localConfigPath);
             }
